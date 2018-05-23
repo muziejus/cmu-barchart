@@ -83,7 +83,7 @@ function drawBarChart(gistData){
   // }
   //
   // Pull the ages from the user data.
-  const ages = gistData.users.map( user => parseInt(user.age) );
+  const ages = gistData.users.map( user => parseInt(user.age) ).sort((a, b) => a - b);
   // Get the unique ages.
   const uniqueAges = new Set(ages);
   // Build out a count for each age

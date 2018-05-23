@@ -1,4 +1,4 @@
-/* global d3 env */
+/* global d3 */
 $(document).ready( () => {
   
   getUserData(function(userData){
@@ -25,18 +25,12 @@ $(document).ready( () => {
         // No user found, so create a new one
         // Create the new contents of the users.json gist file.
         users.push(form_contents);
-        const file_content = JSON.stringify({users: users}, null, 2);
         $.ajax({
-          url: "https://api.github.com/gists/" + env.gistID,
-          headers: {"Authorization": "token " + env.accessKey},
-          type: "PATCH",
-          contentType: "application/json",
-          data: JSON.stringify({
-            description: "User store for CMU-barchart", 
-            files: { 
-              "users.json": { "content": file_content } 
-            } 
-          }),
+          url: "https://api.myjson.com/bins/t6tmq",
+          type: "PUT",
+          dataType:"json",
+          contentType: "application/json; charset=utf-8",
+          data: users,
           success: () => {
             // close the form.
             $("#login").collapse("hide");
@@ -75,8 +69,8 @@ $(document).ready( () => {
 
 
 function getUserData(callback){
-  $.getJSON("https://api.github.com/gists/" + env.gistID, function(data){
-    callback(JSON.parse(data.files["users.json"].content));
+  $.getJSON("https://api.myjson.com/bins/t6tmq", function(data){
+    callback(data);
   });
 }
 

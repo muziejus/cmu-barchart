@@ -96,7 +96,28 @@ window.addEventListener("load", function() {
     }
   }
 
+  var userProfile;
+
+  function getProfile() {
+    if (!userProfile) {
+      var accessToken = localStorage.getItem("access_token");
+      if (!accessToken) {
+        console.log("Access Token must exist to fetch profile");
+      } else {
+        webAuth.client.userInfo(accessToken, function(err, profile) {
+          if (profile) {
+            userProfile = profile;
+            console.log(userProfile);
+          } else {
+            console.log("no profile.");
+          }
+        });
+      }
+    }
+  }
+
   // And once everything is located
   handleAuthentication();
+  getProfile();
 });  
 

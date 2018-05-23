@@ -25,7 +25,7 @@ $(document).ready( () => {
         // No user found, so create a new one
         // Create the new contents of the users.json gist file.
         users.push(form_contents);
-        const file_content = JSON.stringify({users: users});
+        const file_content = JSON.stringify({users: users}, null, 2);
         $.ajax({
           url: "https://api.github.com/gists/" + env.gistID,
           headers: {"Authorization": "token " + env.accessKey},
@@ -40,6 +40,8 @@ $(document).ready( () => {
           success: () => {
             // close the form.
             $("#login").collapse("hide");
+            // show the about.
+            $("#about").removeClass("d-none");
             // wipe the chart.
             $("svg").html("");
             // draw the chart.
@@ -59,6 +61,8 @@ $(document).ready( () => {
           // form.  
           // close the form.
           $("#login").collapse("hide");
+          // show the about
+          $("#about").removeClass("d-none");
           // wipe any old highlights.
           $(".bar").removeClass("highlight");
           // highlight the appropriate age bar.

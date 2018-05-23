@@ -1,7 +1,16 @@
 /* global d3 */
 $(document).ready( () => {
+
+  // const gist = {
+  // uri: "https://api.myjson.com/bins/t6tmq"
+  // verb: "PUT"
+  // };
+  const gist = {
+    uri: "https://jsonblob.com/api/jsonBlob/ac77e6c7-5e55-11e8-a54b-372774b9f527",
+    verb: "PUT"
+  };
   
-  getUserData(function(userData){
+  getUserData(gist, function(userData){
     drawBarChart(userData);
   });
 
@@ -17,7 +26,7 @@ $(document).ready( () => {
       age: $("#age").val(),
     };
     // Get the data store
-    getUserData(data => { 
+    getUserData(gist, data => { 
       // find the user
       const users = data.users;
       const user = users.filter(user => user.email === form_contents.email)[0];
@@ -26,12 +35,12 @@ $(document).ready( () => {
         // Create the new contents of the users.json gist file.
         users.push(form_contents);
         $.ajax({
-          url: "https://api.myjson.com/bins/t6tmq",
-          type: "PUT",
-          dataType:"json",
-          contentType: "application/json; charset=utf-8",
-          data: users,
-          success: () => {
+          url: gist.uri,
+          type: gist.verb,
+          headers: {"Accept": "application/json"},
+          contentType: "application/json",
+          data: JSON.stringify(users),
+          success: (data) => {
             // close the form.
             $("#login").collapse("hide");
             // show the about.
@@ -42,7 +51,7 @@ $(document).ready( () => {
             drawBarChart({users, highlight: form_contents.age});
           }, 
           error: (e) => {
-            console.log(e.responseJSON);
+            console.log(e);
           }
         });
       } else {
@@ -68,8 +77,8 @@ $(document).ready( () => {
 });
 
 
-function getUserData(callback){
-  $.getJSON("https://api.myjson.com/bins/t6tmq", function(data){
+function getUserData(gist, callback){
+  $.getJSON(gist.uri, function(data){
     callback(data);
   });
 }

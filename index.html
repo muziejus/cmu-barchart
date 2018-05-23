@@ -22,25 +22,30 @@
     <main class="container p-3">
       <div class="collapse" id="login">
         <div class="card card-body">
-          <form id="login-form">
+          <div id="alert"></div>
+          <form id="form-card">
             <div class="form-group">
               <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email">
+              <input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" required>
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password">
+              <label for="password">Password (<strong>not secure!</strong>)</label>
+              <input type="text" name="password" class="form-control" id="password" placeholder="Password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" name="age" class="form-control" id="age" placeholder="Age" required>
+            </div>
+            <button type="Submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/env.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

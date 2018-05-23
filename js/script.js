@@ -9,6 +9,11 @@ $(document).ready( () => {
     uri: "https://jsonblob.com/api/jsonBlob/ac77e6c7-5e55-11e8-a54b-372774b9f527",
     verb: "PUT"
   };
+
+  $("svg").attr("height", 0.6 * $(window).height())
+    .attr("width", 0.8 * $(window).width());
+
+
   
   getUserData(gist, function(userData){
     drawBarChart(userData);
@@ -40,7 +45,7 @@ $(document).ready( () => {
           headers: {"Accept": "application/json"},
           contentType: "application/json",
           data: JSON.stringify({users}),
-          success: (data) => {
+          success: () => {
             // close the form.
             $("#login").collapse("hide");
             // show the about.
@@ -98,9 +103,9 @@ function drawBarChart(gistData){
     return { age, count: ages.filter(a => a === age).length};
   });
 
-  // set d3 defaults; This all basically copy pastes https://bl.ocks.org/mbostock/3885304
+  // This all basically copy pastes https://bl.ocks.org/mbostock/3885304
   const svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    margin = {top: 10, right: 10, bottom: 30, left: 30},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
   const x = d3.scaleBand().rangeRound([0, width]).padding(0.1),

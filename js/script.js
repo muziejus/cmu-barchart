@@ -11,7 +11,7 @@ $(document).ready( () => {
   };
 
   $("svg").attr("height", 0.6 * $(window).height())
-    .attr("width", 0.8 * $(window).width());
+    .attr("width", 0.9 * $("#container").width());
 
 
   

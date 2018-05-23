@@ -39,7 +39,7 @@ $(document).ready( () => {
           type: gist.verb,
           headers: {"Accept": "application/json"},
           contentType: "application/json",
-          data: JSON.stringify(users),
+          data: JSON.stringify({users}),
           success: (data) => {
             // close the form.
             $("#login").collapse("hide");

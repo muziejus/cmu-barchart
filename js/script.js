@@ -21,7 +21,6 @@ $(document).ready( () => {
       // find the user
       const users = data.users;
       const user = users.filter(user => user.email === form_contents.email)[0];
-      const returnData = {users: "users", highlight: "highlight"};
       if(!user) {
         // No user found, so create a new one
         // Create the new contents of the users.json gist file.
@@ -38,10 +37,13 @@ $(document).ready( () => {
               "users.json": { "content": file_content } 
             } 
           }),
-          success: (data) => {
-            // Choose which age to highlight and return everything as data.
-            returnData.users = users;
-            returnData.highlight = form_contents.age;
+          success: () => {
+            // close the form.
+            $("#login").collapse("hide");
+            // wipe the chart.
+            $("svg").html("");
+            // draw the chart.
+            drawBarChart({users, highlight: form_contents.age});
           }, 
           error: (e) => {
             console.log(e.responseJSON);
@@ -55,9 +57,12 @@ $(document).ready( () => {
         } else {
           // NB, we don't update the age, even if it's been changed in the
           // form.  
-          // Choose which age to highlight and return everything as data.
-          returnData.users = users;
-          returnData.highlight = user.age;
+          // close the form.
+          $("#login").collapse("hide");
+          // wipe any old highlights.
+          $(".bar").removeClass("highlight");
+          // highlight the appropriate age bar.
+          $("#bar-" + user.age).addClass("highlight");
         }
       }
     });
@@ -138,7 +143,7 @@ function drawBarChart(gistData){
 
   if(gistData.highlight){
     // A highlight value was passed along
-    $("#bar-" + gistData.highlight).removeClass("bar").addClass("highlight");
+    $("#bar-" + gistData.highlight).addClass("highlight");
   }
 }
 

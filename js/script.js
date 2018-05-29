@@ -1,19 +1,15 @@
 /* global d3 */
 $(document).ready( () => {
 
-  // const gist = {
-  // uri: "https://api.myjson.com/bins/t6tmq"
-  // verb: "PUT"
-  // };
+  // Hook up with our JSON store
   const gist = {
     uri: "https://jsonblob.com/api/jsonBlob/ac77e6c7-5e55-11e8-a54b-372774b9f527",
     verb: "PUT"
   };
 
+  // Resize the svg to make the graphic responsive
   $("svg").attr("height", 0.6 * $(window).height())
     .attr("width", 0.9 * $("#container").width());
-
-
   
   getUserData(gist, function(userData){
     drawBarChart(userData);
@@ -158,6 +154,3 @@ function drawBarChart(gistData){
     $("#bar-" + gistData.highlight).addClass("highlight");
   }
 }
-
-
-
